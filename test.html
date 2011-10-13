@@ -1,0 +1,87 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Dynamic Drive: CSS Top Frame Layout</title>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<script type="text/javascript" src="src/jquery.js"></script>
+<script type="text/javascript" src="src/GPXParser.js"></script>
+<script type="text/javascript" src="src/RenderGMap.js"></script>
+<script type="text/javascript" src="src/TrailGraph.js"></script>
+
+<script type="text/javascript" src="lib/raphael/raphael.js"></script>
+<script type="text/javascript" src="lib/raphael/g.raphael.js"></script>
+<script type="text/javascript" src="lib/raphael/g.line.js"></script>
+
+
+
+<script type="text/javascript">
+  function initialize() {
+    $.get('data/gpx_test_big.xml', null, drawMap);
+  }
+
+  function drawMap(data) {
+    var parser = new GPXParser();
+    parser.setXmlDoc(data);
+  
+    var myLatLng = new google.maps.LatLng(0, -180);
+    var myOptions = {
+      zoom: 3,
+      center: myLatLng,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    };
+
+    var map = new google.maps.Map(document.getElementById("maincontent"), myOptions);
+    var mapRenderer = new RenderMap(map);
+  
+    mapRenderer.drawTrackPoints(parser.getTrackPoints()); 
+    mapRenderer.centerAndZoom(parser.getMinMaxTrackPoints())
+	  
+    var tg = new TrailGraph({});
+    tg.setTrackPoints(parser.getTrackPoints());
+    // Creates canvas 320 × 300 at 10, 50
+    var r = Raphael('framecontent');
+    //var x = tg.getTimeTicks().slice(0,5);
+    var y = tg.getElevationTicks();
+    // Creates a simple line chart at 10, 10
+    // width 300, height 220
+    var x = [];
+    for (i=0; i<y.length; i++){
+      x.push(i);
+    }
+    console.log(x);
+    //var y = [10,20,15,35,30];
+    var linec = r.g.linechart(10,10,400,200, x, y, {"colors":["#444"], "symbol":"s", axis:"0 0 1 1"});
+    linec.hover(function() {
+      this.symbol.attr({'fill':'#CCC'});
+    }, function() {
+      this.symbol.attr({'fill':'#444'});
+    });
+
+  }
+
+</script>
+
+</head>
+
+<body onload="initialize()">
+
+<div id="framecontent">
+<div class="innertube">
+
+</div>
+</div>
+
+
+<div id="maincontent">
+
+</div>
+
+
+</body>
+</html>
+

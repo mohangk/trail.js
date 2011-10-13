@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <metadata>
+        <link href="http://www.garmin.com">
+            <text>Garmin International</text>
+        </link>
+        <time>2011-09-14T12:19:08Z</time>
+        <bounds maxlat="5.481555461883545" maxlon="100.345020582899451" minlat="5.275738835334778" minlon="100.202865600585938"></bounds>
+    </metadata>
+    <trk>
+        <name>Test GPX2</name>
+        <trkseg>
+            <trkpt lat="37.772323" lon="-122.214897">
+                <ele>32.822265625</ele>
+                <time>2011-09-10T22:51:54Z</time>
+            </trkpt>
+            <trkpt lat="21.291982" lon="-157.821856">
+                <ele>32.822265625</ele>
+                <time>2011-09-10T22:52:23Z</time>
+            </trkpt>
+            <trkpt lat="-18.142599" lon="178.431">
+                <ele>32.822265625</ele>
+                <time>2011-09-10T22:52:44Z</time>
+	    </trkpt>
+            <trkpt lat="-27.46758" lon="153.027892">
+                <ele>32.822265625</ele>
+                <time>2011-09-10T22:52:44Z</time>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>
