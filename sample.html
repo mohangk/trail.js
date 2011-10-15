@@ -92,20 +92,17 @@ width: 100%;
     tg.setTrackPoints(parser.getTrackPoints());
     // Creates canvas 320 × 300 at 10, 50
     var r = Raphael('holder');
-    var x = tg.getTimeTicks().slice(0,5);
+    var x = tg.getDistanceTicks();
     var y = tg.getElevationTicks();
     // Creates a simple line chart at 10, 10
     // width 300, height 220
-    var x = [];
+    /*var x = [];
     for (i=0; i<y.length; i++){
       x.push(i);
-    }
+    } */
     //console.log(x);
 
-    //new Ico.LineGraph(document.getElementById("map_canvas"), y);
-
-    //var y = [10,20,15,35,30];
-    var linec = r.g.linechart(10,10,1024,100, x, y);
+    var linec = r.g.linechart(25,0,1024,100, x, y, {'axis':'0 0 1 1'});
     /*linec.hover(function() {
       this.symbol.attr({'fill':'#CCC'});
     }, function() {
