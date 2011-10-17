@@ -13,7 +13,6 @@
 <script type="text/javascript" src="src/TrailGraph.js"></script>
 
 <script type="text/javascript" src="lib/raphael/raphael.js"></script>
-<script src="lib/ico.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" src="lib/raphael/g.raphael.js"></script>
 <script type="text/javascript" src="lib/raphael/g.line.js"></script>
@@ -37,16 +36,26 @@ width: 100%;
 height: 130px; /*Height of frame div*/
 overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
 /*background-color: navy;
-color: white;*/
+/*color: white;*/
 }
 
+#bottomcontent{
+position: absolute; 
+bottom: 0; 
+left: 0; 
+width: 100%; 
+height: 65px; /*Height of frame div*/
+overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
+/*background-color: navy;
+/*color: white;*/
+}
 
 #maincontent{
 position: fixed; 
 top: 130px; /*Set top value to HeightOfFrameDiv*/
 left: 0;
 right: 0;
-bottom: 0;
+bottom: 65px;
 overflow: auto; 
 background: #fff;
 }
@@ -67,11 +76,27 @@ width: 100%;
 </style>
 
 <script type="text/javascript">
-  function initialize() {
+	function initialize() {
     $.get('data/gpx_test_big.xml', null, drawMap);
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+  }
+
+  function handleFileSelect(evt){
+      var files = evt.target.files;
+      var output = [];
+      for (var i = 0, f; f = files[i]; i++) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          drawMap(e.target.result);
+        }
+        reader.readAsText(f);
+      }
+      //document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+      
   }
 
   function drawMap(data) {
+    console.log(data);
     var parser = new GPXParser();
     parser.setXmlDoc(data);
   
@@ -80,7 +105,7 @@ width: 100%;
       zoom: 3,
       center: myLatLng,
       mapTypeId: google.maps.MapTypeId.TERRAIN
-    };
+  }
 
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     var mapRenderer = new RenderMap(map);
@@ -122,6 +147,10 @@ width: 100%;
 <div id="maincontent">
   <div id="map_canvas"></div>
 </div>
-
+<div id="bottomcontent">
+	<div class="innertube">
+		<input type="file" id="files" name="files[]" multiple /> <output id="list"></output>
+	</div>
+</div>
 </body>
 </html>
