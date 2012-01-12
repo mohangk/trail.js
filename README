@@ -1,4 +1,4 @@
 trail.js
 
 trail.js is a Javascript toolkit to quickly visualise trail logs. Currently it supports GPX based track files.
-
+Clone the repo and access sample.html to see things work.
